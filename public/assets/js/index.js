@@ -32,6 +32,8 @@ const getNotes = () =>
       'Content-Type': 'application/json',
     },
   });
+//get and post requests return promises that can be chained on
+//the promise here is resolved when the data is successfully retrieved from the server
 
 const saveNote = (note) =>
   fetch('/api/notes', {
@@ -119,6 +121,7 @@ const handleRenderSaveBtn = () => {
 // Render the list of note titles
 const renderNoteList = async (notes) => {
   let jsonNotes = await notes.json();
+  console.log(jsonNotes);
   if (window.location.pathname === '/notes') {
     noteList.forEach((el) => (el.innerHTML = ''));
   }
@@ -172,6 +175,7 @@ const renderNoteList = async (notes) => {
 
 // Gets notes from the db and renders them to the sidebar
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
+//getNotes() fetches the notes
 
 if (window.location.pathname === '/notes') {
   saveNoteBtn.addEventListener('click', handleNoteSave);
